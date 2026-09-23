@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ToneCraft — say it the right way</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">ToneCraft</span>
+        <span class="brand-tagline">say it the right way</span>
+      </div>
+      <nav class="tabs" role="tablist">
+        <button class="tab-btn is-active" data-tab="compose" role="tab">Compose</button>
+        <button class="tab-btn" data-tab="saved" role="tab">Saved <span class="tab-count" id="savedCount"></span></button>
+        <button class="tab-btn" data-tab="history" role="tab">History</button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- TAB: COMPOSE -->
+      <section id="tab-compose" class="tab-panel is-active">
+        <div class="hero">
+          <h1>Describe it once, get it <em>three ways</em>.</h1>
+          <p>Tell ToneCraft what you want to say — like "politely decline an invitation" — and get a few ready-to-send drafts, each with a different tone.</p>
+        </div>
+
+        <div class="workspace">
+          <aside class="panel input-panel">
+            <div class="field-group">
+              <label for="contextInput">What do you want to say?</label>
+              <textarea id="contextInput" rows="5" placeholder="e.g. I want to politely decline a wedding invitation because I'll be traveling that weekend."></textarea>
+            </div>
+
+            <div class="field-group">
+              <button type="button" class="link-toggle" id="toggleOriginal">+ Add the message you're replying to (optional)</button>
+              <textarea id="originalInput" rows="4" placeholder="Paste the original message here..." hidden></textarea>
+            </div>
+
+            <div class="field-group">
+              <label for="messageType">Message type</label>
+              <select id="messageType">
+                <option value="email" selected>Email</option>
+                <option value="text">Text message</option>
+                <option value="chat">Chat / Slack message</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="formality">Formality</label>
+              <select id="formality">
+                <option value="no preference" selected>No preference</option>
+                <option value="more formal">More formal</option>
+                <option value="more casual">More casual</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="numVariants">Number of variants</label>
+              <select id="numVariants">
+                <option value="2">2 variants</option>
+                <option value="3" selected>3 variants</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="language">Output language</label>
+              <select id="language">
+                <option value="auto" selected>Match my text</option>
+                <option value="English">English</option>
+                <option value="Romanian">Romanian</option>
+                <option value="Spanish">Spanish</option>
+                <option value="French">French</option>
+                <option value="German">German</option>
+              </select>
+            </div>
+
+            <button id="composeBtn" class="btn-primary" type="button">Generate messages</button>
+            <p id="formError" class="error-msg" hidden></p>
+          </aside>
+
+          <section class="results-area">
+            <div id="loadingState" class="loading-state" hidden>
+              <div class="spinner" aria-hidden="true"></div>
+              <p>Drafting your messages...</p>
+            </div>
+
+            <div id="emptyState" class="empty-state">
+              <p>Describe your situation and press <strong>Generate messages</strong> — your drafts will appear here.</p>
+            </div>
+
+            <div id="variantResults" class="variant-grid"></div>
+          </section>
+        </div>
+      </section>
+
+      <!-- TAB: SAVED -->
+      <section id="tab-saved" class="tab-panel">
+        <div class="panel-header">
+          <h2>Saved messages</h2>
+          <p>Saved locally, in this browser.</p>
+        </div>
+        <div id="savedEmpty" class="empty-state">
+          <p>You don't have any saved messages yet. Press "Save" on a draft to keep it here.</p>
+        </div>
+        <div id="savedGrid" class="variant-grid"></div>
+      </section>
+
+      <!-- TAB: HISTORY -->
+      <section id="tab-history" class="tab-panel">
+        <div class="panel-header">
+          <h2>Recent requests</h2>
+          <p>Your last 20 message requests, most recent first.</p>
+        </div>
+        <div id="historyEmpty" class="empty-state">
+          <p>You haven't generated any messages yet.</p>
+        </div>
+        <ul id="historyList" class="history-list"></ul>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
