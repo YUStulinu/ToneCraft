@@ -17,6 +17,11 @@ jobs:
 
       - run: npm ci
 
+
+      - name: Tests (the AI APIs are faked)
+
+        run: npm test
+
       # Server code is CommonJS; files under public/js are browser ES modules.
       - name: Syntax check
         run: |

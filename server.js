@@ -110,9 +110,13 @@ Do not invent specific facts, dates, or commitments that were not implied by the
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`ToneCraft is running at http://localhost:${PORT}`);
-  if (!ANTHROPIC_API_KEY) {
-    console.warn('⚠️  ANTHROPIC_API_KEY is not set. Copy .env.example to .env and add your key.');
-  }
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`ToneCraft is running at http://localhost:${PORT}`);
+    if (!ANTHROPIC_API_KEY) {
+      console.warn('⚠️  ANTHROPIC_API_KEY is not set. Copy .env.example to .env and add your key.');
+    }
+  });
+}
+
+module.exports = { app };
